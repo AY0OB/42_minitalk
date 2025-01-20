@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amairia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 18:46:28 by amairia           #+#    #+#             */
-/*   Updated: 2025/01/20 18:48:23 by amairia          ###   ########.fr       */
+/*   Created: 2024/10/09 15:25:27 by amairia           #+#    #+#             */
+/*   Updated: 2024/10/14 20:59:02 by amairia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "../libft_with_gnl_printf/libft.h"
-
-enum
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	READY,
-	BUSY,
-};
+	size_t			i;
+	unsigned char	*s1_ch;
+	unsigned char	*s2_ch;
 
-void	ft_signal(int signal, void *handler, bool use_siginfo);
-void	ft_kill(pid_t pid, int signal);
-
-#endif
+	if (!s1 || !s2)
+		return (0);
+	s1_ch = (unsigned char *)s1;
+	s2_ch = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (s1_ch[i] != s2_ch[i])
+			return (s1_ch[i] - s2_ch[i]);
+		i++;
+	}
+	return (0);
+}

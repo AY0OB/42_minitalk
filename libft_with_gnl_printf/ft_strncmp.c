@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amairia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 18:46:28 by amairia           #+#    #+#             */
-/*   Updated: 2025/01/20 18:48:23 by amairia          ###   ########.fr       */
+/*   Created: 2024/10/08 17:48:37 by amairia           #+#    #+#             */
+/*   Updated: 2024/10/14 16:45:48 by amairia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "../libft_with_gnl_printf/libft.h"
-
-enum
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	READY,
-	BUSY,
-};
+	size_t	i;
 
-void	ft_signal(int signal, void *handler, bool use_siginfo);
-void	ft_kill(pid_t pid, int signal);
-
-#endif
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		if (s1[i] != s2[i] || !s1[i] || !s2[i])
+			return ((int)((unsigned char)(s1[i]) - (unsigned char)(s2[i])));
+		i++;
+	}
+	return (0);
+}

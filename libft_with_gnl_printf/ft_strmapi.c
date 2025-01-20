@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amairia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 18:46:28 by amairia           #+#    #+#             */
-/*   Updated: 2025/01/20 18:48:23 by amairia          ###   ########.fr       */
+/*   Created: 2024/10/15 15:27:03 by amairia           #+#    #+#             */
+/*   Updated: 2024/10/16 09:42:50 by amairia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "../libft_with_gnl_printf/libft.h"
-
-enum
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	READY,
-	BUSY,
-};
+	char			*res;
+	unsigned int	i;
 
-void	ft_signal(int signal, void *handler, bool use_siginfo);
-void	ft_kill(pid_t pid, int signal);
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	res = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		res[i] = f(i, s[i]);
+		i++;
+	}
+	return (res);
+}

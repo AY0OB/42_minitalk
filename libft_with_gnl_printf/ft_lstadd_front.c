@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amairia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 18:46:28 by amairia           #+#    #+#             */
-/*   Updated: 2025/01/20 18:48:23 by amairia          ###   ########.fr       */
+/*   Created: 2024/10/15 20:54:37 by amairia           #+#    #+#             */
+/*   Updated: 2024/10/16 08:40:50 by amairia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "../libft_with_gnl_printf/libft.h"
-
-enum
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	READY,
-	BUSY,
-};
-
-void	ft_signal(int signal, void *handler, bool use_siginfo);
-void	ft_kill(pid_t pid, int signal);
-
-#endif
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}

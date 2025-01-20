@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amairia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 18:46:28 by amairia           #+#    #+#             */
-/*   Updated: 2025/01/20 18:48:23 by amairia          ###   ########.fr       */
+/*   Created: 2024/10/15 17:13:32 by amairia           #+#    #+#             */
+/*   Updated: 2024/10/15 17:33:24 by amairia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "../libft_with_gnl_printf/libft.h"
-
-enum
+void	ft_putnbr_fd(int n, int fd)
 {
-	READY,
-	BUSY,
-};
+	int	c;
 
-void	ft_signal(int signal, void *handler, bool use_siginfo);
-void	ft_kill(pid_t pid, int signal);
-
-#endif
+	if (fd < 0)
+		return ;
+	if (n < 0 && n != -2147483648)
+	{
+		n *= -1;
+		write(fd, "-", 1);
+	}
+	else if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+	}
+	if (n != -2147483648)
+	{
+		c = (n % 10) + '0';
+		n = n / 10;
+		if (n != 0)
+			ft_putnbr_fd(n, fd);
+		write(fd, &c, 1);
+	}
+}
